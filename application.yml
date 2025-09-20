@@ -1,0 +1,16 @@
+general:
+  kafka-topic: transactions-topic
+
+kafka:
+  topic: transactions-topic   # ✅ FIXED: Match the topic name used by tests
+
+spring:
+  kafka:
+    consumer:
+      bootstrap-servers: ${spring.embedded.kafka.brokers:localhost:9092}
+      group-id: midas-core-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
